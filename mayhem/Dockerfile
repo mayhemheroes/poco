@@ -15,7 +15,7 @@
 ################################################################################
 
 FROM gcr.io/oss-fuzz-base/base-builder
-RUN apt-get update && apt-get install -y openssl libssl-dev git make cmake libssl-dev
+RUN apt-get -o Acquire::Retries=5 update && apt-get -o Acquire::Retries=5 install -y openssl libssl-dev git make cmake
 COPY . poco
 RUN rm -rf poco/mayhem
 WORKDIR $SRC/poco
