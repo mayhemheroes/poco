@@ -15,9 +15,8 @@
 ################################################################################
 
 FROM gcr.io/oss-fuzz-base/base-builder
-# Ubuntu 20.04 (focal) is EOL; fall back to old-releases mirror for reliable package downloads
-RUN sed -i "s|http://archive.ubuntu.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g; s|http://security.ubuntu.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g" /etc/apt/sources.list 2>/dev/null || true
-RUN apt-get -o Acquire::Retries=5 update && apt-get -o Acquire::Retries=5 install -y openssl libssl-dev git make cmake
+RUN apt-get -o Acquire::Retries=10 -o Acquire::http::Timeout=30 update && \
+    apt-get -o Acquire::Retries=10 -o Acquire::http::Timeout=30 install -y openssl libssl-dev git make cmake
 COPY . poco
 RUN rm -rf poco/mayhem
 WORKDIR $SRC/poco
