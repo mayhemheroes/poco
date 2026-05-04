@@ -17,7 +17,7 @@
 
 mkdir cmake-build
 cd cmake-build
-cmake -DBUILD_SHARED_LIBS=OFF \
+cmake -DBUILD_SHARED_LIBS=OFF -DENABLE_DATA=OFF -DENABLE_DATA_SQLITE=OFF -DENABLE_DATA_ODBC=OFF -DENABLE_DATA_MYSQL=OFF \
       -DENABLE_TESTS=OFF \
       ..
 make -j$(nproc)
